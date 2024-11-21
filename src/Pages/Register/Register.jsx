@@ -6,6 +6,8 @@ import { updateProfile } from "firebase/auth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useState } from "react";
 
 const cloudinary_url = `https://api.cloudinary.com/v1_1/${
   import.meta.env.VITE_CLOUD_NAME
@@ -16,6 +18,7 @@ const Register = () => {
   const axiosPublic = useAxiosPublic();
   const { registerUser } = useAuth();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -54,19 +57,22 @@ const Register = () => {
       };
       console.log(userInfo);
       // Save user info to your database
-      // const reqRes = await axiosPublic.post("/users", userInfo);
-      // if (reqRes.data.insertedId) {
-      //   toast.success("Account Created");
-
-      //   // Redirect after registration
-      //   setTimeout(() => {
-      //     navigate(location?.state ? location.state : "/");
-      //   }, 1000);
-      // }
+      const reqRes = await axiosPublic.post("/users", userInfo);
+      if (reqRes.data.insertedId) {
+        toast.success("Account Created");
+        // Redirect after registration
+        setTimeout(() => {
+          navigate(location?.state ? location.state : "/");
+        }, 1000);
+      }
     } catch (error) {
       console.log(error);
       toast.error("Error creating account. Please try again.");
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -145,7 +151,7 @@ const Register = () => {
                 </span>
               )}
             </div>
-            <div>
+            <div className="relative">
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700"
@@ -153,17 +159,33 @@ const Register = () => {
                 Password
               </label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"} // Toggle input type
                 id="password"
-                {...register("password", { required: true })}
+                {...register("password", {
+                  required: "Password is required", // Required validation
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+                    message:
+                      "Password must contain at least 1 uppercase, 1 lowercase, 1 number, and be at least 6 characters long",
+                  },
+                })}
                 className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
               />
               {errors.password && (
                 <span className="text-sm text-red-600 font-semibold">
-                  Password is required
+                  {errors.password.message}
                 </span>
               )}
+              {/* Eye icon for toggle */}
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute top-9 right-3 text-gray-600 hover:text-black"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
             </div>
+
             <div>
               <button
                 type="submit"

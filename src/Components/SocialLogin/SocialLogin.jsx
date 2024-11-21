@@ -20,8 +20,9 @@ const SocialLogin = () => {
           userImage: res.user?.photoURL,
           role: "user",
         };
-        axiosPublic.post("/users", userInfo).then((result) => {
-          console.log(result.data);
+        axiosPublic.post("/users", userInfo)
+        .then(() => {
+          // console.log(result.data);
           toast.success("Account Created");
           navigate(location?.state ? location.state : "/");
         });
