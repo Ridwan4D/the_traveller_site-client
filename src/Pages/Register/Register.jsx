@@ -4,10 +4,10 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { updateProfile } from "firebase/auth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import useAuth from "../../Hooks/useAuth";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const cloudinary_url = `https://api.cloudinary.com/v1_1/${
   import.meta.env.VITE_CLOUD_NAME
