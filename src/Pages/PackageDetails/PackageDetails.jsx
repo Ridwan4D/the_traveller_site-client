@@ -7,7 +7,6 @@ const PackageDetails = () => {
   const { id } = useParams();
   const { packages } = usePackages();
   const thePackage = packages.find((pkg) => pkg?._id === id);
-
   if (!thePackage) return <div>Loading...</div>; // Handle loading state
 
   return (
@@ -15,7 +14,10 @@ const PackageDetails = () => {
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
         {/* Image Section */}
         <div className="flex justify-center items-center">
-          <ImageSide images={thePackage.images} />
+          <ImageSide
+            images={thePackage.images}
+            packDetails={thePackage?.description}
+          />
         </div>
 
         {/* Package Information Section */}

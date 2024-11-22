@@ -12,7 +12,7 @@ const OtherInfo = ({ pack }) => {
       </h2>
 
       {/* Package Description */}
-      <div className="text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed">
+      <div className="text-sm md:text-lg lg:text-xl text-gray-700 leading-relaxed xl:hidden">
         {parsedContent}
       </div>
 
@@ -64,7 +64,7 @@ const OtherInfo = ({ pack }) => {
 };
 
 OtherInfo.propTypes = {
-  pack: PropTypes.object.isRequired,
+  pack: PropTypes.object,
 };
 
 export default OtherInfo;
