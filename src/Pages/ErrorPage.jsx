@@ -2,26 +2,27 @@ import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
   return (
-    <section className="flex items-center h-full p-16 dark:bg-gray-50 dark:text-gray-800">
-      <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-        <div className="max-w-md text-center">
-          <h2 className="mb-8 font-extrabold text-9xl dark:text-gray-400">
-            <span className="sr-only">Error</span>404
-          </h2>
-          <p className="text-2xl font-semibold md:text-3xl">
-            Sorry, we couldn&apos;t find this page.
-          </p>
-          <p className="mt-4 mb-8 dark:text-gray-600">
-            But dont worry, you can find plenty of other things on our homepage.
-          </p>
-          <Link
-            to={window.history.back()}
-            rel="noopener noreferrer"
-            className="px-8 py-3 font-semibold rounded dark:bg-violet-600 dark:text-gray-50"
-          >
-            Back to homepage
-          </Link>
-        </div>
+    <section className="flex items-center justify-center h-screen bg-gradient-to-r from-indigo-200 via-white to-indigo-200">
+      <div className="text-center max-w-md px-5">
+        {/* Error Code */}
+        <h2 className="mb-8 font-extrabold text-9xl text-indigo-500">
+          <span className="sr-only">Error</span>404
+        </h2>
+        {/* Error Message */}
+        <p className="text-2xl font-semibold md:text-3xl text-gray-800">
+          Oops! The page you&apos;re looking for doesn&apos;t exist.
+        </p>
+        <p className="mt-4 mb-8 text-gray-600">
+          It seems we can&apos;t find the page you&apos;re looking for. Head
+          back to the homepage and continue exploring.
+        </p>
+        {/* Back Button */}
+        <Link
+          to="/"
+          className="px-8 py-3 font-semibold text-white bg-indigo-500 hover:bg-indigo-600 transition rounded-lg shadow-md"
+        >
+          Back to Homepage
+        </Link>
       </div>
     </section>
   );
