@@ -118,6 +118,10 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-white text-gray-800 rounded-box w-52"
             >
               {navLinks}
+              {/* Mobile SearchBar */}
+              <li className="mt-3">
+                <SearchBar packages={packages} />
+              </li>
             </ul>
           )}
         </div>
@@ -134,8 +138,8 @@ const Navbar = () => {
 
       {/* Navbar End */}
       <div className="navbar-end flex items-center space-x-4">
-        {/* SearchBar */}
-        <div className="hidden md:flex justify-end">
+        {/* Desktop SearchBar */}
+        <div className="hidden md:flex justify-end w-full">
           <SearchBar packages={packages} />
         </div>
 
