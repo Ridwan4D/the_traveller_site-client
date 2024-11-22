@@ -8,6 +8,8 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
+import { MdAddCard } from "react-icons/md";
+import AddTourTypeModal from "./Shared/AddTourTypeModal";
 
 const CLOUDINARY_PRESET = import.meta.env.VITE_UPLOAD_PRESET;
 const CLOUDINARY_CLOUD_NAME = `https://api.cloudinary.com/v1_1/${
@@ -24,6 +26,7 @@ const AddPackage = () => {
     setValue,
   } = useForm();
   const [selectedImages, setSelectedImages] = useState([]);
+  const [isModalOpen, setModalOpen] = useState(false);
   const [activities, setActivities] = useState([{ day: 1, activity: "" }]);
 
   const handleImageChange = (e) => {
@@ -117,7 +120,8 @@ const AddPackage = () => {
       toast.error("Failed to add package!");
     }
   };
-
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
   return (
     <div>
       <Helmet>
@@ -127,6 +131,12 @@ const AddPackage = () => {
         heading="Add New Package"
         subHeading="Write Package offer"
       />
+      <div className="flex items-center justify-between px-1 md:px-4 max-w-5xl mx-auto py-5 bg-gray-100 mb-5">
+        <h3 className="font-semibold text-slate-800">Add Tour Type</h3>
+        <button className="text-2xl" onClick={openModal}>
+          <MdAddCard />
+        </button>
+      </div>
       <form
         className="max-w-5xl mx-auto border-2 border-slate-400 p-2 md:p-6"
         onSubmit={handleSubmit(onSubmit)}
@@ -347,6 +357,7 @@ const AddPackage = () => {
           </button>
         </div>
       </form>
+      <AddTourTypeModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import usePackages from "../../../Hooks/usePackages";
 
@@ -14,6 +15,9 @@ const ManagePackages = () => {
 
   return (
     <div className="container mx-auto p-6">
+      <Helmet>
+        <title>Manage Package | Traveller Site</title>
+      </Helmet>
       <SectionTitle
         heading="Manage Packages"
         subHeading="View, edit, or delete packages"
@@ -22,7 +26,7 @@ const ManagePackages = () => {
       {/* Table for displaying packages */}
       <div className="overflow-x-auto bg-white shadow-lg rounded-lg mt-6">
         <table className="min-w-full text-sm text-left text-gray-500">
-          <thead className="text-xs uppercase bg-indigo-600 text-white">
+          <thead className="text-xs uppercase bg-indigo-500 text-white">
             <tr>
               <th scope="col" className="px-6 py-3 border"></th>
               <th scope="col" className="px-6 py-3 border">
@@ -68,7 +72,7 @@ const ManagePackages = () => {
                 </td>
                 <td className="px-6 py-4 border">${pkg.price}</td>
                 <td className="px-6 py-4 border">{pkg.duration} Days</td>
-                <td className="px-6 py-4 border">{pkg.tour_type}</td>
+                <td className="px-6 py-4 border">{pkg.trip_type}</td>
                 <td className="px-6 py-4 border border-b-0 flex space-x-3">
                   <button
                     className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
