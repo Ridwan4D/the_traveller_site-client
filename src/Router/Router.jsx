@@ -7,6 +7,7 @@ import Register from "../Pages/Register/Register";
 import DashboardLayout from "../Layout/DashboardLayout";
 import SecureRoute from "./SecureRoute";
 import AddPackage from "../Pages/AdminPage/AddPackage/AddPackage";
+import ManagePackages from "../Pages/AdminPage/ManagePackages/ManagePackages";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,14 @@ const router = createBrowserRouter([
         element: (
           <SecureRoute>
             <AddPackage />
+          </SecureRoute>
+        ),
+      },
+      {
+        path: "managePackages",
+        element: (
+          <SecureRoute>
+            <ManagePackages />
           </SecureRoute>
         ),
       },

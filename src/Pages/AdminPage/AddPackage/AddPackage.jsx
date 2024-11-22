@@ -107,7 +107,7 @@ const AddPackage = () => {
       const res = await axiosSecure.post("/packages", packageInfo);
       if (res.data.insertedId) {
         toast.success(`${data.name} has been added to packages`);
-        navigate("/allPackages");
+        navigate("managePackages");
         reset();
         setSelectedImages([]);
         setActivities([{ day: 1, activity: "" }]);
