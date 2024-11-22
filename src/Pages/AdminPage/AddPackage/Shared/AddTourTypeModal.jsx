@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { MdClose } from "react-icons/md";
-import useTourTypes from "../../../Hooks/useTourTypes"; // Assume a similar hook like useCategories
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import useTourTypes from "../../../../Hooks/useTourTypes";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 
 const AddTourTypeModal = ({ isOpen, onClose }) => {
   const axiosPublic = useAxiosPublic();
-  const { tourTypes, refetch } = useTourTypes(); // Fetch existing tour types
+  const { tourTypes, refetch } = useTourTypes();
 
   const {
     register,
@@ -18,11 +18,11 @@ const AddTourTypeModal = ({ isOpen, onClose }) => {
 
   const handleAddTourType = (data) => {
     const tourTypeInfo = {
-      tourType: data.tourType.toLowerCase(),
+      trip_type: data.tourType.toLowerCase(),
     };
 
     axiosPublic
-      .post("/tour-types", tourTypeInfo)
+      .post("/tourTypes", tourTypeInfo)
       .then((res) => {
         if (res.data.insertedId) {
           toast.success("Tour type added");
@@ -93,7 +93,7 @@ const AddTourTypeModal = ({ isOpen, onClose }) => {
               </div>
               <button
                 type="submit"
-                className="w-full px-5 py-3 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none"
+                className="w-full px-5 py-3 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none"
               >
                 Add Tour Type
               </button>
