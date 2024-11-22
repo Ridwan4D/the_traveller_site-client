@@ -10,14 +10,18 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
 import { MdAddCard } from "react-icons/md";
 import AddTourTypeModal from "./Shared/AddTourTypeModal";
+import useTourTypes from "../../../Hooks/useTourTypes";
 
 const CLOUDINARY_PRESET = import.meta.env.VITE_UPLOAD_PRESET;
 const CLOUDINARY_CLOUD_NAME = `https://api.cloudinary.com/v1_1/${
   import.meta.env.VITE_CLOUD_NAME
 }/image/upload`;
+
 const AddPackage = () => {
   const axiosSecure = useAxiosSecure();
+  const { tourTypes } = useTourTypes();
   const navigate = useNavigate();
+  console.log(tourTypes);
   const {
     register,
     handleSubmit,
@@ -110,7 +114,7 @@ const AddPackage = () => {
       const res = await axiosSecure.post("/packages", packageInfo);
       if (res.data.insertedId) {
         toast.success(`${data.name} has been added to packages`);
-        navigate("managePackages");
+        navigate("/dashboard/managePackages");
         reset();
         setSelectedImages([]);
         setActivities([{ day: 1, activity: "" }]);
@@ -214,15 +218,23 @@ const AddPackage = () => {
             >
               Type
             </label>
-            <input
-              type="text"
+            <select
               id="type"
               {...register("type", { required: true })}
               className="bg-gray-50 border border-gray-300 text-gray-900 h-7 md:h-auto text-xs md:text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
+            >
+              <option value="" disabled selected>
+                Select a Type
+              </option>
+              {tourTypes?.map((tourType, idx) => (
+                <option key={idx} value={tourType.trip_type}>
+                  {tourType.trip_type}
+                </option>
+              ))}
+            </select>
             {errors.type && (
               <span className="text-sm text-red-600 font-semibold">
-                Fill This Field
+                Select a tour type
               </span>
             )}
           </div>

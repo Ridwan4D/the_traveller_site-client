@@ -8,6 +8,8 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import SecureRoute from "./SecureRoute";
 import AddPackage from "../Pages/AdminPage/AddPackage/AddPackage";
 import ManagePackages from "../Pages/AdminPage/ManagePackages/ManagePackages";
+import ManageUsers from "../Pages/AdminPage/ManageUsers/ManageUsers";
+import PackageDetails from "../Pages/PackageDetails/PackageDetails";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "/packageDetails/:id",
+        element: <PackageDetails />,
       },
     ],
   },
@@ -50,6 +56,14 @@ const router = createBrowserRouter([
         element: (
           <SecureRoute>
             <ManagePackages />
+          </SecureRoute>
+        ),
+      },
+      {
+        path: "manageUsers",
+        element: (
+          <SecureRoute>
+            <ManageUsers />
           </SecureRoute>
         ),
       },

@@ -1,13 +1,10 @@
 import { Helmet } from "react-helmet";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import usePackages from "../../../Hooks/usePackages";
+import { Link } from "react-router-dom";
 
 const ManagePackages = () => {
   const { packages } = usePackages();
-
-  const handleEdit = (id) => {
-    console.log(`Edit package with id: ${id}`);
-  };
 
   const handleDelete = (id) => {
     console.log(`Delete package with id: ${id}`);
@@ -44,7 +41,7 @@ const ManagePackages = () => {
               <th scope="col" className="px-6 py-3 border">
                 Tour Type
               </th>
-              <th scope="col" className="px-6 py-3 border">
+              <th scope="col" className="px-6 py-3 border text-center">
                 Actions
               </th>
             </tr>
@@ -72,15 +69,20 @@ const ManagePackages = () => {
                 </td>
                 <td className="px-6 py-4 border">${pkg.price}</td>
                 <td className="px-6 py-4 border">{pkg.duration} Days</td>
-                <td className="px-6 py-4 border">{pkg.trip_type}</td>
-                <td className="px-6 py-4 border border-b-0 flex space-x-3">
-                  <button
+                <td className="px-6 py-4 border uppercase">{pkg.trip_type}</td>
+                <td className="px-6 py-4 border border-b-0 flex space-x-3 justify-center">
+                  <Link
+                    to={`/packageDetails/${pkg._id}`}
+                    className="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600 transition"
+                  >
+                    Details
+                  </Link>
+                  <Link
+                    to={`/updatePackage/${pkg._id}`}
                     className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
-                    // Edit action
-                    onClick={() => handleEdit(pkg._id)}
                   >
                     Edit
-                  </button>
+                  </Link>
                   <button
                     className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
                     // Delete action

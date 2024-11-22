@@ -59,7 +59,7 @@ const AddTourTypeModal = ({ isOpen, onClose }) => {
                   key={idx}
                   className="px-4 py-2 bg-gray-200 rounded-md shadow-sm uppercase"
                 >
-                  {type.tourType}
+                  {type.trip_type}
                 </li>
               ))}
             </ul>
