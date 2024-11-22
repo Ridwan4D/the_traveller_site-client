@@ -15,7 +15,7 @@ const DashboardLayout = () => {
   const { isAdmin } = useAdmin();
   const { isGuide } = useGuide();
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
-  console.log(isGuide, isAdmin);
+//   console.log(isGuide, isAdmin);
   const handleLogout = () => {
     logout();
   };
