@@ -9,7 +9,7 @@ const useGuide = () => {
     queryKey: [user?.email, "isGuide"],
     queryFn: async () => {
       const result = await axiosSecure.get(`/users/guide/${user?.email}`);
-      return result.data?.admin;
+      return result.data?.guide;
     },
   });
   return { isGuide, isGuideLoading };

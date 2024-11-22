@@ -4,16 +4,18 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import { CgProfile } from "react-icons/cg";
 import useAdmin from "../Hooks/useAdmin";
-import { LuPackagePlus } from "react-icons/lu";
 import { HiUserGroup } from "react-icons/hi";
 import { TbPackages } from "react-icons/tb";
 import { TiHomeOutline } from "react-icons/ti";
+import useGuide from "../Hooks/useGuide";
+import { MdAddCard, MdAssignmentTurnedIn } from "react-icons/md";
 
 const DashboardLayout = () => {
   const { logout } = useAuth();
   const { isAdmin } = useAdmin();
+  const { isGuide } = useGuide();
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
-  console.log(isAdmin);
+  console.log(isGuide, isAdmin);
   const handleLogout = () => {
     logout();
   };
@@ -96,7 +98,7 @@ const DashboardLayout = () => {
                     to="addPackage"
                     className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500"
                   >
-                    <LuPackagePlus />
+                    <MdAddCard />
                     <span>Add Package</span>
                   </NavLink>
                 </li>
@@ -120,18 +122,33 @@ const DashboardLayout = () => {
                 </li>
               </>
             )}
+            {isGuide && (
+              <>
+                <li>
+                  <NavLink
+                    to="assignedTour"
+                    className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500"
+                  >
+                    <MdAssignmentTurnedIn />
+                    <span>My Assigned Tours</span>
+                  </NavLink>
+                </li>
+              </>
+            )}
             <hr />
-            <Link
-              to="/"
-              className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500"
-            >
-              <div className="flex items-center self-center">
-                <TiHomeOutline />
-              </div>
-              <div className="flex w-full flex-1 flex-col items-start justify-center gap-0 overflow-hidden truncate text-sm">
-                Home
-              </div>
-            </Link>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500"
+              >
+                <div className="flex items-center self-center">
+                  <TiHomeOutline />
+                </div>
+                <div className="flex w-full flex-1 flex-col items-start justify-center gap-0 overflow-hidden truncate text-sm">
+                  Home
+                </div>
+              </Link>
+            </li>
           </ul>
         </nav>
         <footer className="border-t border-slate-200 p-3">
