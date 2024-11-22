@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../Hooks/useAuth";
 import SearchBar from "./Shared/SearchBar";
 
 const Navbar = () => {

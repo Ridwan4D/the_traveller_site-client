@@ -7,7 +7,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../Hooks/useAuth";
 
 const cloudinary_url = `https://api.cloudinary.com/v1_1/${
   import.meta.env.VITE_CLOUD_NAME

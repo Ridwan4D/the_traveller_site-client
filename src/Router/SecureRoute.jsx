@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
 import PropType from "prop-types";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../Hooks/useAuth";
 
 const SecureRoute = ({ children }) => {
   const { user, isLoading } = useAuth();

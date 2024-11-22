@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { RiLogoutCircleLine } from "react-icons/ri";
-import { Link, Outlet } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import useAuth from "../Hooks/useAuth";
 import { CgProfile } from "react-icons/cg";
-import useUsers from "../Hooks/useUser";
+import useAdmin from "../Hooks/useAdmin";
+import { LuPackagePlus } from "react-icons/lu";
+import { HiUserGroup } from "react-icons/hi";
+import { TbPackages } from "react-icons/tb";
+import { TiHomeOutline } from "react-icons/ti";
 
 const DashboardLayout = () => {
   const { logout } = useAuth();
-  const { users } = useUsers();
+  const { isAdmin } = useAdmin();
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
-
+  console.log(isAdmin);
   const handleLogout = () => {
     logout();
   };
@@ -73,8 +77,8 @@ const DashboardLayout = () => {
         >
           <ul className="flex flex-1 flex-col gap-1 py-3">
             <li className="px-3">
-              <Link
-                to="/profile"
+              <NavLink
+                to="profile"
                 className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500"
               >
                 <div className="flex items-center self-center">
@@ -83,8 +87,51 @@ const DashboardLayout = () => {
                 <div className="flex w-full flex-1 flex-col items-start justify-center gap-0 overflow-hidden truncate text-sm">
                   Profile
                 </div>
-              </Link>
+              </NavLink>
             </li>
+            {isAdmin && (
+              <>
+                <li>
+                  <NavLink
+                    to="addPackage"
+                    className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500"
+                  >
+                    <LuPackagePlus />
+                    <span>Add Package</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="manageUsers"
+                    className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500"
+                  >
+                    <HiUserGroup />
+                    <span>Manage Users</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="managePackages"
+                    className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500"
+                  >
+                    <TbPackages />
+                    <span>Manage Packages</span>
+                  </NavLink>
+                </li>
+              </>
+            )}
+            <hr />
+            <Link
+              to="/"
+              className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500"
+            >
+              <div className="flex items-center self-center">
+                <TiHomeOutline />
+              </div>
+              <div className="flex w-full flex-1 flex-col items-start justify-center gap-0 overflow-hidden truncate text-sm">
+                Home
+              </div>
+            </Link>
           </ul>
         </nav>
         <footer className="border-t border-slate-200 p-3">

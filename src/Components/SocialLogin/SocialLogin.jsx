@@ -2,7 +2,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../Hooks/useAuth";
 import PropType from "prop-types";
 
 const SocialLogin = ({ logProp }) => {

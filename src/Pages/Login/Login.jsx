@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../Hooks/useAuth";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const Login = () => {
