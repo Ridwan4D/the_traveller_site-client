@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import SearchBar from "./Shared/SearchBar";
 
 const Navbar = () => {
-  const { user } = useAuth(); // User context
+  const { user, logout } = useAuth();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = (
@@ -59,6 +59,9 @@ const Navbar = () => {
       </li>
     </>
   );
+  const handleLogout = () => {
+    logout();
+  };
 
   const packages = [
     {
@@ -167,7 +170,9 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li>
-                <button className="hover:text-teal-500">Logout</button>
+                <button onClick={handleLogout} className="hover:text-teal-500">
+                  Logout
+                </button>
               </li>
             </ul>
           </div>
