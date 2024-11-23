@@ -165,7 +165,7 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-white text-gray-800 rounded-box w-52"
             >
               <li>
-                <NavLink to="/dashboard" className="hover:text-teal-500">
+                <NavLink to="/dashboard/profile" className="hover:text-teal-500">
                   Dashboard
                 </NavLink>
               </li>

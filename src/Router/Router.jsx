@@ -11,6 +11,8 @@ import ManagePackages from "../Pages/AdminPage/ManagePackages/ManagePackages";
 import ManageUsers from "../Pages/AdminPage/ManageUsers/ManageUsers";
 import PackageDetails from "../Pages/PackageDetails/PackageDetails";
 import UpdatePackage from "../Pages/AdminPage/UpdatePackage/UpdatePackage";
+import Profile from "../Pages/Profile/Profile";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +26,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/packageDetails/:id",
-        element: <PackageDetails />,
+        element: (
+          <SecureRoute>
+            <PackageDetails />
+          </SecureRoute>
+        ),
       },
     ],
   },
@@ -45,35 +51,43 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "addPackage",
+        path: "profile",
         element: (
           <SecureRoute>
-            <AddPackage />
+            <Profile />
           </SecureRoute>
+        ),
+      },
+      {
+        path: "addPackage",
+        element: (
+          <AdminRoute>
+            <AddPackage />
+          </AdminRoute>
         ),
       },
       {
         path: "updatePackage/:id",
         element: (
-          <SecureRoute>
+          <AdminRoute>
             <UpdatePackage />
-          </SecureRoute>
+          </AdminRoute>
         ),
       },
       {
         path: "managePackages",
         element: (
-          <SecureRoute>
+          <AdminRoute>
             <ManagePackages />
-          </SecureRoute>
+          </AdminRoute>
         ),
       },
       {
         path: "manageUsers",
         element: (
-          <SecureRoute>
+          <AdminRoute>
             <ManageUsers />
-          </SecureRoute>
+          </AdminRoute>
         ),
       },
     ],

@@ -53,6 +53,7 @@ const Register = () => {
         userName: data.name,
         userEmail: data.email,
         userImage: imageUrl,
+        createdAt: new Date().toISOString().split("T")[0],
         role: "user",
       };
       console.log(userInfo);
