@@ -15,7 +15,7 @@ const DashboardLayout = () => {
   const { isAdmin } = useAdmin();
   const { isGuide } = useGuide();
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
-//   console.log(isGuide, isAdmin);
+  //   console.log(isGuide, isAdmin);
   const handleLogout = () => {
     logout();
   };
@@ -60,10 +60,10 @@ const DashboardLayout = () => {
           isSideNavOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <a
+        <Link
+          to="/"
           aria-label="WindUI logo"
           className="flex items-center gap-2 whitespace-nowrap p-6 text-xl font-medium focus:outline-none"
-          href="#"
         >
           <img
             src="https://res.cloudinary.com/duv5fiurz/image/upload/v1732204179/2_lmjnt4.png"
@@ -71,7 +71,7 @@ const DashboardLayout = () => {
             className="w-10 h-10"
           />
           Traveller Site
-        </a>
+        </Link>
         <hr />
         <nav
           aria-label="side navigation"
