@@ -2,12 +2,31 @@ import { Helmet } from "react-helmet";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import usePackages from "../../../Hooks/usePackages";
 import { Link } from "react-router-dom";
-
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 const ManagePackages = () => {
-  const { packages } = usePackages();
+  const axiosSecure = useAxiosSecure();
+  const { packages, refetch } = usePackages();
 
   const handleDelete = (id) => {
-    console.log(`Delete package with id: ${id}`);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/packages/${id}`).then((res) => {
+          if (res.data.deletedCount) {
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            refetch();
+          }
+        });
+      }
+    });
   };
 
   return (
@@ -85,7 +104,6 @@ const ManagePackages = () => {
                   </Link>
                   <button
                     className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
-                    // Delete action
                     onClick={() => handleDelete(pkg._id)}
                   >
                     Delete
