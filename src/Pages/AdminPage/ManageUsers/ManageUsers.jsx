@@ -2,9 +2,12 @@ import { useState } from "react";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useUsers from "../../../Hooks/useUser";
 import UpdateRoleModal from "./Shared/UpdateRoleModal";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const ManageUsers = () => {
-  const { users } = useUsers();
+  const { users, refetch } = useUsers();
+  const axiosSecure = useAxiosSecure();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -13,6 +16,26 @@ const ManageUsers = () => {
     setIsModalOpen(true);
   };
 
+  const handleDeleteUser = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${id}`).then((res) => {
+          if (res.data.deletedCount) {
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            refetch();
+          }
+        });
+      }
+    });
+  };
   return (
     <div className="p-2 md:p-6 bg-gray-100 min-h-screen">
       <SectionTitle
@@ -58,7 +81,10 @@ const ManageUsers = () => {
                     >
                       Update
                     </button>
-                    <button className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition flex items-center justify-center gap-1 ml-2">
+                    <button
+                      onClick={() => handleDeleteUser(user?._id)}
+                      className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition flex items-center justify-center gap-1 ml-2"
+                    >
                       Delete
                     </button>
                   </td>
