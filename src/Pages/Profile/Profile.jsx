@@ -1,8 +1,19 @@
+import { useState } from "react";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import useUsers from "../../Hooks/useUser";
+import UpdateUserModal from "./Shared/UpdateUserModal";
 
 const Profile = () => {
   const { theUser } = useUsers();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleEditProfile = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
@@ -15,7 +26,7 @@ const Profile = () => {
           {/* Profile Image */}
           <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-indigo-600">
             <img
-              src={theUser?.userImage || "/default-avatar.jpg"} // Add default avatar if no image
+              src={theUser?.userImage || "/default-avatar.jpg"}
               alt="User Avatar"
               className="w-full h-full object-cover"
             />
@@ -37,6 +48,50 @@ const Profile = () => {
             <span className="font-medium text-gray-700 text-lg">Email:</span>
             <span className="text-gray-500">{theUser?.userEmail || "N/A"}</span>
           </div>
+          {theUser?.phone && (
+            <div className="flex justify-between">
+              <span className="font-medium text-gray-700 text-lg">Phone:</span>
+              <span className="text-gray-500">{theUser?.phone || "N/A"}</span>
+            </div>
+          )}
+          {theUser?.education && (
+            <div className="flex justify-between">
+              <span className="font-medium text-gray-700 text-lg">
+                Education:
+              </span>
+              <span className="text-gray-500">
+                {theUser?.education || "N/A"}
+              </span>
+            </div>
+          )}
+          {theUser?.languages && (
+            <div className="flex justify-between">
+              <span className="font-medium text-gray-700 text-lg">
+                Languages:
+              </span>
+              <span className="text-gray-500">
+                {theUser?.languages || "N/A"}
+              </span>
+            </div>
+          )}
+          {theUser?.address && (
+            <div className="flex justify-between">
+              <span className="font-medium text-gray-700 text-lg">
+                Address:
+              </span>
+              <span className="text-gray-500">{theUser?.address || "N/A"}</span>
+            </div>
+          )}
+          {theUser?.experience && (
+            <div className="flex justify-between">
+              <span className="font-medium text-gray-700 text-lg">
+                Experience:
+              </span>
+              <span className="text-gray-500">
+                {theUser?.experience || "N/A"}
+              </span>
+            </div>
+          )}
           <div className="flex justify-between">
             <span className="font-medium text-gray-700 text-lg">
               Joined On:
@@ -45,13 +100,22 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Optional: Add more user details like address, phone number, etc. */}
         <div className="mt-8 flex justify-end">
-          <button className="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 hover:shadow-xl transition-all duration-300 ease-in-out">
+          <button
+            onClick={handleEditProfile}
+            className="bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 hover:shadow-xl transition-all duration-300 ease-in-out"
+          >
             Edit Profile
           </button>
         </div>
       </div>
+
+      {/* Update User Modal */}
+      <UpdateUserModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        userInfo={theUser}
+      />
     </div>
   );
 };
