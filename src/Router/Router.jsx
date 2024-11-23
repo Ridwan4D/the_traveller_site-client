@@ -10,6 +10,7 @@ import AddPackage from "../Pages/AdminPage/AddPackage/AddPackage";
 import ManagePackages from "../Pages/AdminPage/ManagePackages/ManagePackages";
 import ManageUsers from "../Pages/AdminPage/ManageUsers/ManageUsers";
 import PackageDetails from "../Pages/PackageDetails/PackageDetails";
+import UpdatePackage from "../Pages/AdminPage/UpdatePackage/UpdatePackage";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,14 @@ const router = createBrowserRouter([
         element: (
           <SecureRoute>
             <AddPackage />
+          </SecureRoute>
+        ),
+      },
+      {
+        path: "updatePackage/:id",
+        element: (
+          <SecureRoute>
+            <UpdatePackage />
           </SecureRoute>
         ),
       },

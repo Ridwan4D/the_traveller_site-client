@@ -175,7 +175,7 @@ const DashboardLayout = () => {
       ></div>
 
       {/* Content area for child components */}
-      <main className="ml-0 lg:ml-72 p-6">
+      <main className="ml-0 lg:ml-72 p-2 md:p-6">
         <Outlet />
       </main>
     </>

@@ -14,7 +14,7 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-2 md:p-6 bg-gray-100 min-h-screen">
       <SectionTitle
         heading="Manage User"
         subHeading="Overview of all registered users"

@@ -11,7 +11,7 @@ const ManagePackages = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-2 md:p-6">
       <Helmet>
         <title>Manage Package | Traveller Site</title>
       </Helmet>
@@ -65,7 +65,7 @@ const ManagePackages = () => {
                   )}
                 </td>
                 <td className="px-6 py-4 font-medium text-gray-800 border">
-                  {pkg.tour_name}
+                  <span className="block w-32">{pkg.tour_name}</span>
                 </td>
                 <td className="px-6 py-4 border">${pkg.price}</td>
                 <td className="px-6 py-4 border">{pkg.duration} Days</td>
@@ -78,10 +78,10 @@ const ManagePackages = () => {
                     Details
                   </Link>
                   <Link
-                    to={`/updatePackage/${pkg._id}`}
+                    to={`/dashboard/updatePackage/${pkg._id}`}
                     className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
                   >
-                    Edit
+                    Update
                   </Link>
                   <button
                     className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
