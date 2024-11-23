@@ -320,9 +320,9 @@ const AddPackage = () => {
           <button
             type="button"
             onClick={addActivityField}
-            className="bg-blue-500 text-white py-2 px-4 rounded-md"
+            className="text-blue-500 border-b border-blue-500"
           >
-            Add More Activities
+            +Add Activities
           </button>
         </div>
 
