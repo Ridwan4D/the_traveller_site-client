@@ -37,7 +37,7 @@ const ManageUsers = () => {
             {users?.length > 0 ? (
               users.map((user, index) => (
                 <tr
-                  key={user.id}
+                  key={index}
                   className="border-b last:border-none odd:bg-gray-50 even:bg-white text-gray-700 text-sm hover:bg-gray-100"
                 >
                   <td className="py-3 px-4">{index + 1}</td>

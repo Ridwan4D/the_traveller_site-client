@@ -1,11 +1,15 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa"; // Importing the cross icon
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import useUsers from "../../../../Hooks/useUser";
+import toast from "react-hot-toast";
 
 const UpdateRoleModal = ({ user, onClose, requested }) => {
+  const axiosSecure = useAxiosSecure();
+  const { refetch } = useUsers();
   const [disable, setDisable] = useState(true);
 
-  // Use effect to enable/disable the Cancel button based on the requested prop
   useEffect(() => {
     if (requested) {
       setDisable(false);
@@ -13,8 +17,18 @@ const UpdateRoleModal = ({ user, onClose, requested }) => {
   }, [requested]);
 
   const handleRoleClick = (role) => {
-    console.log(`Role for ${user.userName} is changed to ${role}`);
-    onClose(); // Close the modal after role change
+    const userInfo = { role, requested };
+    axiosSecure.put(`/users/admin/${user._id}`, userInfo).then((res) => {
+      if (res.data.modifiedCount) {
+        refetch();
+        if (role === "user") {
+          toast.dismiss(`${user.userName}'s request is canceled`);
+        } else {
+          toast.success(`${user.userName} is now ${role}`);
+        }
+      }
+    });
+    onClose();
   };
 
   return (
@@ -31,31 +45,44 @@ const UpdateRoleModal = ({ user, onClose, requested }) => {
         <h3 className="text-lg font-semibold mb-4">
           Update Role for {user.userName}
         </h3>
-        <div className="flex justify-between">
-          <button
-            onClick={() => handleRoleClick("Admin")}
-            className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition"
-          >
-            Admin
-          </button>
-          <button
-            onClick={() => handleRoleClick("Guide")}
-            className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition"
-          >
-            Guide
-          </button>
-          <button
-            onClick={onClose}
-            disabled={disable}
-            className={`${
-              disable ? "bg-gray-500 cursor-not-allowed" : "bg-gray-500 hover:bg-gray-600"
-            } text-white px-4 py-2 rounded-md transition`}
-            style={{
-              cursor: disable ? "not-allowed" : "pointer",
-            }}
-          >
-            Cancel
-          </button>
+        <div className="flex justify-center gap-4 mt-4">
+          {user?.role !== "admin" && (
+            <button
+              onClick={() => handleRoleClick("admin", false)}
+              className="bg-[#1D4ED8] text-white px-4 py-2 rounded-md hover:bg-[#1E40AF] transition"
+            >
+              Admin
+            </button>
+          )}
+          {user?.role !== "guide" && (
+            <button
+              onClick={() => handleRoleClick("guide", false)}
+              className="bg-[#14B8A6] text-white px-4 py-2 rounded-md hover:bg-[#0F766E] transition"
+            >
+              Guide
+            </button>
+          )}
+          {user?.role !== "user" && (
+            <button
+              onClick={() => handleRoleClick("user", false)}
+              className="bg-[#4F46E5] text-white px-4 py-2 rounded-md hover:bg-[#3730A3] transition"
+            >
+              User
+            </button>
+          )}
+          {user?.requested && (
+            <button
+              onClick={() => handleRoleClick("user", false)}
+              disabled={disable}
+              className={`${
+                disable
+                  ? "bg-gray-500 cursor-not-allowed"
+                  : "bg-gray-500 hover:bg-gray-600"
+              } text-white px-4 py-2 rounded-md transition`}
+            >
+              Cancel
+            </button>
+          )}
         </div>
       </div>
     </div>
