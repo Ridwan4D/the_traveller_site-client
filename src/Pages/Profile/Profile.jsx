@@ -2,6 +2,7 @@ import { useState } from "react";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import useUsers from "../../Hooks/useUser";
 import UpdateUserModal from "./Shared/UpdateUserModal";
+import AddStoryForm from "../../Components/AddStoryForm/AddStoryForm";
 
 const Profile = () => {
   const { theUser } = useUsers();
@@ -109,6 +110,9 @@ const Profile = () => {
           </button>
         </div>
       </div>
+
+      {/* story section for tourist */}
+      {theUser?.role === "user" && <AddStoryForm />}
 
       {/* Update User Modal */}
       <UpdateUserModal

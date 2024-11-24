@@ -21,6 +21,9 @@ import UserRoute from "./UserRoute";
 import Wishlist from "../Pages/UserPage/WishlistPage/Wishlist";
 import BookingPage from "../Pages/UserPage/BookingPage/BookingPage";
 import AssignedTour from "../Pages/GuidePage/AssignedTour";
+import GuideRoute from "./GuideRoute";
+import CommunityPage from "../Pages/CommunityPage/CommunityPage";
+import AboutPage from "../Pages/AboutPage/AboutPage";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "/community",
+        element: <CommunityPage />,
       },
       {
         path: "/packageDetails/:id",
@@ -55,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "/allPackages",
         element: <AllPackage />,
+      },
+      {
+        path: "/about-us",
+        element: <AboutPage />,
       },
     ],
   },
@@ -141,9 +152,9 @@ const router = createBrowserRouter([
       {
         path: "assignedTour",
         element: (
-          <AdminRoute>
+          <GuideRoute>
             <AssignedTour />
-          </AdminRoute>
+          </GuideRoute>
         ),
       },
     ],

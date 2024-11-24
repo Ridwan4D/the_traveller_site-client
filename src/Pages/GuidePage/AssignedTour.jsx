@@ -5,7 +5,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 
 const AssignedTour = () => {
-  const { guideBookings } = useGuideBooking();
+  const { guideBookings, refetch } = useGuideBooking();
   const axiosSecure = useAxiosSecure();
 
   const handleAction = (id, status) => {
@@ -13,6 +13,7 @@ const AssignedTour = () => {
     axiosSecure.patch(`/guideBookings/${id}`, bookingInfo).then((res) => {
       if (res.data.modifiedCount) {
         toast.success(`Booking ${status}`);
+        refetch();
       }
     });
   };

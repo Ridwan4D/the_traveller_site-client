@@ -24,16 +24,29 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li className="transition duration-300 ease-in-out">
-        <NavLink
-          to="/community"
-          className={({ isActive }) =>
-            isActive
-              ? "text-teal-600 font-semibold border-b-2 border-teal-600"
-              : "text-gray-600 font-semibold hover:text-teal-600 transition duration-300 ease-in-out"
-          }
-        >
-          Community
-        </NavLink>
+        {!user ? (
+          <NavLink
+            to="/community"
+            className={({ isActive }) =>
+              isActive
+                ? "text-teal-600 font-semibold border-b-2 border-teal-600"
+                : "text-gray-600 font-semibold hover:text-teal-600 transition duration-300 ease-in-out"
+            }
+          >
+            Community
+          </NavLink>
+        ) : (
+          <NavLink
+            to="/allPackages"
+            className={({ isActive }) =>
+              isActive
+                ? "text-teal-600 font-semibold border-b-2 border-teal-600"
+                : "text-gray-600 font-semibold hover:text-teal-600 transition duration-300 ease-in-out"
+            }
+          >
+            Packages
+          </NavLink>
+        )}
       </li>
       <li className="transition duration-300 ease-in-out">
         <NavLink

@@ -128,7 +128,11 @@ const BookingPage = () => {
                     <td className="py-3 text-center">
                       <button
                         disabled={item.status === "Rejected"}
-                        className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600"
+                        className={`px-4 py-2 rounded-md ${
+                          item.status === "Rejected"
+                            ? "bg-gray-400 cursor-not-allowed"
+                            : "bg-teal-500 hover:bg-teal-600 text-white"
+                        }`}
                       >
                         Pay
                       </button>
@@ -137,7 +141,11 @@ const BookingPage = () => {
                       <button
                         disabled={item.status === "Accepted"}
                         onClick={() => handleDelete(item._id)}
-                        className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                        className={`px-4 py-2 rounded-md ${
+                          item.status === "Accepted"
+                            ? "bg-gray-400 cursor-not-allowed"
+                            : "bg-red-500 hover:bg-red-600 text-white"
+                        }`}
                       >
                         Cancel
                       </button>
