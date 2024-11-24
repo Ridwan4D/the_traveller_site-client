@@ -5,11 +5,15 @@ import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { FaRegHeart } from "react-icons/fa6";
 import useWishlist from "../../Hooks/useWishlist";
+import useAdmin from "../../Hooks/useAdmin";
+import useGuide from "../../Hooks/useGuide";
 
 const PackageCard = ({ pkg }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { wishlists, refetch } = useWishlist();
+  const { isAdmin } = useAdmin();
+  const { isGuide } = useGuide();
   const wishId = wishlists.find((findId) => findId.mainPackId === pkg?._id);
 
   const handleAddToWishlist = (id) => {
@@ -48,12 +52,14 @@ const PackageCard = ({ pkg }) => {
           src={pkg?.images?.[0]}
           alt={pkg?.tour_name}
         />
-        <button
-          className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-lg hover:bg-red-100 transition duration-300"
-          onClick={() => handleAddToWishlist(pkg?._id)}
-        >
-          <FaRegHeart size={20} />
-        </button>
+        {!isAdmin && !isGuide && (
+          <button
+            className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-lg hover:bg-red-100 transition duration-300"
+            onClick={() => handleAddToWishlist(pkg?._id)}
+          >
+            <FaRegHeart size={20} />
+          </button>
+        )}
       </div>
 
       {/* Package Details */}
