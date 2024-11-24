@@ -28,7 +28,6 @@ const SearchBar = ({ packages }) => {
     const searchTerm = search.toLowerCase();
     return (
       pkg?.name?.toLowerCase().includes(searchTerm) ||
-      pkg?.description?.toLowerCase().includes(searchTerm) ||
       pkg?.category?.toLowerCase().includes(searchTerm)
     );
   });
@@ -46,7 +45,7 @@ const SearchBar = ({ packages }) => {
         <input
           type="text"
           name="search"
-          placeholder="Search for packages..."
+          placeholder="Search package by name & type"
           className="w-full md:w-2/3 float-end border border-teal-500 px-2 md:px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 transition"
         />
       </form>
@@ -66,13 +65,13 @@ const SearchBar = ({ packages }) => {
                   className="flex flex-col md:flex-row items-center bg-gray-100 p-1 rounded-md hover:bg-gray-200 transition"
                 >
                   <img
-                    src={pkg.image} // Assuming the API returns a valid image URL
+                    src={pkg.images[0]} // Assuming the API returns a valid image URL
                     alt={pkg.name}
                     className="w-16 h-16 object-cover rounded-md mb-3 md:mb-0 md:mr-3"
                   />
                   <div className="text-center md:text-left">
                     <h3 className="text-sm font-semibold text-gray-800">
-                      {pkg.name}
+                      {pkg.tour_name}
                     </h3>
                     <p className="text-teal-600 flex justify-center md:justify-start items-center">
                       <FaBangladeshiTakaSign className="mr-1" />

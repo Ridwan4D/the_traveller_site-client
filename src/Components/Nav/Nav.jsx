@@ -2,9 +2,11 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import SearchBar from "./Shared/SearchBar";
+import usePackages from "../../Hooks/usePackages";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
+  const { packages } = usePackages();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = (
@@ -62,33 +64,6 @@ const Navbar = () => {
   const handleLogout = () => {
     logout();
   };
-
-  const packages = [
-    {
-      id: 1,
-      name: "Beach Paradise",
-      description: "Enjoy a relaxing stay at our beachside resort.",
-      price: 5000,
-      image: "https://via.placeholder.com/150",
-      category: "Beach",
-    },
-    {
-      id: 2,
-      name: "Mountain Retreat",
-      description: "Explore the serene mountain landscapes.",
-      price: 8000,
-      image: "https://via.placeholder.com/150",
-      category: "Mountain",
-    },
-    {
-      id: 3,
-      name: "City Lights Adventure",
-      description: "Discover the bustling life of the city.",
-      price: 7000,
-      image: "https://via.placeholder.com/150",
-      category: "City",
-    },
-  ];
 
   return (
     <nav className="navbar bg-gradient-to-r from-indigo-200 via-indigo-100 to-indigo-200 shadow-lg sticky top-0 z-50 px-4">
@@ -165,7 +140,10 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-white text-gray-800 rounded-box w-52"
             >
               <li>
-                <NavLink to="/dashboard/profile" className="hover:text-teal-500">
+                <NavLink
+                  to="/dashboard/profile"
+                  className="hover:text-teal-500"
+                >
                   Dashboard
                 </NavLink>
               </li>

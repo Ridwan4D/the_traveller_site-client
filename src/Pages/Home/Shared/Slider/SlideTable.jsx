@@ -13,11 +13,6 @@ const SlideTable = ({ onClose }) => {
   const { sliderImages, refetch, isLoading } = useSlideImage();
 
   const onSubmit = async (data) => {
-    if (sliderImages.length >= 3) {
-      toast.error("You can only add up to 3 slides.");
-      return;
-    }
-
     const file = data.image[0];
     const formData = new FormData();
     formData.append("file", file);
@@ -63,7 +58,7 @@ const SlideTable = ({ onClose }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/banners/${id}`).then((res) => {
+        axiosSecure.delete(`/sliders/${id}`).then((res) => {
           if (res.data.deletedCount) {
             refetch();
             toast.success("Slider deleted successfully.");
@@ -126,14 +121,12 @@ const SlideTable = ({ onClose }) => {
               type="text"
               {...register("title")}
               className="w-full p-2 border border-gray-300 rounded mt-1 hover:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-              disabled={sliderImages.length >= 3}
             />
           </div>
           <input
             type="file"
             {...register("image", { required: true })}
             className="file-input file-input-bordered rounded-md w-full max-w-xl  py-1 px-3 my-1"
-            disabled={sliderImages.length >= 3}
           />
 
           <input
@@ -142,7 +135,6 @@ const SlideTable = ({ onClose }) => {
             className={`cursor-pointer bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 w-full rounded focus:outline-none focus:bg-teal-400 transition duration-300 ease-in-out transform hover:scale-95 ${
               sliderImages.length >= 3 ? "opacity-50 cursor-not-allowed" : ""
             }`}
-            disabled={sliderImages.length >= 3}
           />
         </form>
       </div>
