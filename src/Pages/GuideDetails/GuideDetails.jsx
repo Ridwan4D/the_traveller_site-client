@@ -8,7 +8,7 @@ const GuideDetails = () => {
     console.log(theGuide);
     return (
         <div>
-            <h3 className="text-xl">{theGuide?.userName}</h3>
+            <h3 className="text-xl">{theGuide.userName}</h3>
         </div>
     );
 };
