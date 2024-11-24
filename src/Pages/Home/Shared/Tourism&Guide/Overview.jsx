@@ -1,6 +1,6 @@
 const Overview = () => {
   return (
-    <div className="bg-gray-100 py-10 px-5 md:px-20">
+    <div className="bg-gray-100 py-10 px-2 md:px-20">
       {/* Hero Section */}
       <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden rounded-lg shadow-lg">
         <img
@@ -23,7 +23,7 @@ const Overview = () => {
         <p className="mt-4 text-gray-600 max-w-3xl mx-auto">
           Our platform provides a one-stop solution for all your travel needs.
           Discover top tourist destinations, book guided tours, and immerse
-          yourself in the vibrant culture and rich heritage of Bangladesh.
+          yourself in the vibrant culture and rich heritage of World.
         </p>
       </div>
 

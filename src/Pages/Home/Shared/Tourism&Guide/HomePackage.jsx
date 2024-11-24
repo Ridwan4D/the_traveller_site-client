@@ -7,9 +7,9 @@ const HomePackage = () => {
   const { packages } = usePackages();
 
   return (
-    <div>
+    <div className="bg-gray-100">
       {/* Packages Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:p-6 pb-0">
         {packages.slice(0, 3).map((pkg) => (
           <div
             key={pkg._id}
@@ -62,15 +62,16 @@ const HomePackage = () => {
       </div>
 
       {/* Centered Explore Package Button */}
-      <div className="flex justify-center mt-8">
-        <button
-          className="py-3 px-6 bg-green-500 text-white rounded shadow hover:bg-green-600 transition-all duration-300"
+      <div className="flex justify-center mt-8 pb-2">
+        <Link
+          to="#"
+          className="py-3 px-6 bg-teal-500 text-white rounded shadow hover:bg-teal-600 transition-all duration-300"
           onClick={() => {
             toast.success("Explore all packages");
           }}
         >
           Explore Packages
-        </button>
+        </Link>
       </div>
     </div>
   );

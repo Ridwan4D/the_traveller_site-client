@@ -129,7 +129,7 @@ const AddPackage = () => {
   return (
     <div>
       <Helmet>
-        <title>Add Package | Traveller Site</title>
+        <title>Add Package | Traveler Site</title>
       </Helmet>
       <SectionTitle
         heading="Add New Package"

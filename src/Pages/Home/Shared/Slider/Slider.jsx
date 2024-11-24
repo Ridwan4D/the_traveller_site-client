@@ -40,7 +40,7 @@ const Slider = () => {
                 <img
                   src={slide.url}
                   alt={`slide ${idx + 1}`}
-                  className="w-full cursor-pointer h-[50vh] md:max-h-[300px] md:h-auto lg:max-h-[400px] xl:max-h-[500px] 2xl:max-h-[600px] rounded-lg object-cover lg:object-fill md:object-right"
+                  className="w-full cursor-pointer h-[25vh] md:max-h-[300px] md:h-auto lg:max-h-[400px] xl:max-h-[500px] 2xl:max-h-[600px] rounded-lg object-contain md:object-cover lg:object-fill md:object-right"
                 />
 
                 <div className="absolute inset-0 flex flex-col items-start justify-center md:left-5 lg:left-8 px-1">

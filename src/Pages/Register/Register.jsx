@@ -79,7 +79,7 @@ const Register = () => {
   return (
     <div>
       <Helmet>
-        <title>Register | Traveller Site</title>
+        <title>Register | Traveler Site</title>
       </Helmet>
       <div className="flex h-screen items-center justify-center bg-gray-100">
         {/* <!-- Right Pane --> */}

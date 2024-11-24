@@ -152,7 +152,7 @@ const UpdatePackage = () => {
   return (
     <div>
       <Helmet>
-        <title>Update Package | Traveller Site</title>
+        <title>Update Package | Traveler Site</title>
       </Helmet>
       <SectionTitle
         heading="Update Package"
