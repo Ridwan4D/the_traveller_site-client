@@ -41,10 +41,7 @@ const PackageCard = ({ pkg }) => {
       });
   };
   return (
-    <div
-      key={pkg._id}
-      className="relative group overflow-hidden bg-white rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 dark:bg-gray-800"
-    >
+    <div className="relative group overflow-hidden bg-white rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 dark:bg-gray-800">
       {/* Image with Wishlist */}
       <div className="relative">
         <img
@@ -75,7 +72,7 @@ const PackageCard = ({ pkg }) => {
           Price: ${pkg?.price}
         </p>
         <Link
-          to={`/packageDetails/${pkg._id}`}
+          to={`/packageDetails/${pkg?._id}`}
           className="mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-800 dark:focus:ring-blue-900 transition duration-300"
         >
           View Package

@@ -25,6 +25,7 @@ import GuideRoute from "./GuideRoute";
 import CommunityPage from "../Pages/CommunityPage/CommunityPage";
 import AboutPage from "../Pages/AboutPage/AboutPage";
 import StoryDetails from "../Pages/StoryDetails/StoryDetails";
+import TripTypePage from "../Pages/TripType/TripTypePage";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,14 @@ const router = createBrowserRouter([
         element: (
           <SecureRoute>
             <StoryDetails />
+          </SecureRoute>
+        ),
+      },
+      {
+        path: "/tripType/:type",
+        element: (
+          <SecureRoute>
+            <TripTypePage />
           </SecureRoute>
         ),
       },

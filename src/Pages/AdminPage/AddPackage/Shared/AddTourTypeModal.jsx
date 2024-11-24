@@ -19,6 +19,8 @@ const AddTourTypeModal = ({ isOpen, onClose }) => {
   const handleAddTourType = (data) => {
     const tourTypeInfo = {
       trip_type: data.tourType.toLowerCase(),
+      image: data.image, // Image URL field
+      description: data.description, // Description field
     };
 
     axiosPublic
@@ -28,10 +30,27 @@ const AddTourTypeModal = ({ isOpen, onClose }) => {
           toast.success("Tour type added");
           refetch();
           reset();
+          onClose();
         }
       })
       .catch((err) => {
         console.error(`Error: ${err}`);
+        toast.error("Failed to add tour type");
+      });
+  };
+
+  const handleDeleteTourType = (id) => {
+    axiosPublic
+      .delete(`/tourTypes/${id}`)
+      .then((res) => {
+        if (res.data.deletedCount > 0) {
+          toast.success("Tour type deleted");
+          refetch();
+        }
+      })
+      .catch((err) => {
+        console.error(`Error: ${err}`);
+        toast.error("Failed to delete tour type");
       });
   };
 
@@ -57,9 +76,15 @@ const AddTourTypeModal = ({ isOpen, onClose }) => {
               {tourTypes.map((type, idx) => (
                 <li
                   key={idx}
-                  className="px-4 py-2 bg-gray-200 rounded-md shadow-sm uppercase"
+                  className="px-4 py-2 bg-gray-200 rounded-md shadow-sm uppercase flex justify-between items-center"
                 >
-                  {type.trip_type}
+                  <span>{type.trip_type}</span>
+                  <button
+                    onClick={() => handleDeleteTourType(type._id)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    Delete
+                  </button>
                 </li>
               ))}
             </ul>
@@ -88,6 +113,33 @@ const AddTourTypeModal = ({ isOpen, onClose }) => {
                 {errors.tourType && (
                   <p className="text-sm text-red-600">
                     {errors.tourType.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  {...register("image", {
+                    required: "Image URL is required",
+                  })}
+                  placeholder="Enter image URL"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
+                />
+                {errors.image && (
+                  <p className="text-sm text-red-600">{errors.image.message}</p>
+                )}
+              </div>
+              <div>
+                <textarea
+                  {...register("description", {
+                    required: false,
+                  })}
+                  placeholder="Enter tour description"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
+                ></textarea>
+                {errors.description && (
+                  <p className="text-sm text-red-600">
+                    {errors.description.message}
                   </p>
                 )}
               </div>

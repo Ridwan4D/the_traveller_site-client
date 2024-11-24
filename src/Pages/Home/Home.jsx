@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import Slider from "./Shared/Slider/Slider";
 import TourismAndGuide from "./Shared/Tourism&Guide/TourismAndGuide";
 import HomeStory from "./Shared/HomeStory/HomeStory";
+import HomeTourType from "./Shared/HomeStory/HomeTourType/HomeTourType";
 
 const Home = () => {
   return (
@@ -14,6 +15,9 @@ const Home = () => {
       </section>
       <section className="mt-10 border-b border-gray-300 border-dashed">
         <TourismAndGuide />
+      </section>
+      <section className="mt-10 border-b border-gray-300 border-dashed">
+        <HomeTourType />
       </section>
       <section className="mt-10 border-b border-gray-300 border-dashed">
         <HomeStory />
