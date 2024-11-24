@@ -6,14 +6,19 @@ import { useState } from "react";
 import useUsers from "../../Hooks/useUser";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import useGuideReviews from "../../Hooks/useGuideReviews";
 
 const GuideDetails = () => {
   const { id } = useParams();
   const axiosPublic = useAxiosPublic();
   const { guides } = useGuides();
   const { theUser } = useUsers();
+  const { guideReviews } = useGuideReviews();
   const theGuide = guides?.find((guide) => guide?._id === id);
-
+  const theGuideReviews = guideReviews.filter(
+    (guideReview) => guideReview?.guideEmail === theGuide?.userEmail
+  );
+  console.log(theGuideReviews);
   // Use React Hook Form
   const {
     register,
@@ -28,7 +33,7 @@ const GuideDetails = () => {
 
   const handleRatingChange = (newRating) => {
     setRating(newRating);
-    setValue("rating", newRating); // Update React Hook Form state
+    setValue("rating", newRating);
   };
 
   const onSubmit = (data) => {
