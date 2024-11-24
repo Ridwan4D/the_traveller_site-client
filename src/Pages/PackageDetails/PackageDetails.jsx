@@ -23,7 +23,7 @@ const PackageDetails = () => {
       <div className="flex justify-between items-center mb-6">
         {isAdmin && (
           <Link
-            to={`/updatePackage/${thePackage._id}`}
+            to={`/dashboard/updatePackage/${thePackage._id}`}
             className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition"
           >
             Update Package

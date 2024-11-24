@@ -13,6 +13,9 @@ import PackageDetails from "../Pages/PackageDetails/PackageDetails";
 import UpdatePackage from "../Pages/AdminPage/UpdatePackage/UpdatePackage";
 import Profile from "../Pages/Profile/Profile";
 import AdminRoute from "./AdminRoute";
+import GuideDetails from "../Pages/GuideDetails/GuideDetails";
+import AllGuide from "../Pages/AllGuide.jsx/AllGuide";
+import AllPackage from "../Pages/AllPackage.jsx/AllPackage";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,22 @@ const router = createBrowserRouter([
             <PackageDetails />
           </SecureRoute>
         ),
+      },
+      {
+        path: "/guideDetails/:id",
+        element: (
+          <SecureRoute>
+            <GuideDetails />
+          </SecureRoute>
+        ),
+      },
+      {
+        path: "/allGuides",
+        element: <AllGuide />,
+      },
+      {
+        path: "/allPackages",
+        element: <AllPackage />,
       },
     ],
   },

@@ -1,6 +1,5 @@
 import { FaRegHeart } from "react-icons/fa6";
 import usePackages from "../../../../Hooks/usePackages";
-import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const HomePackage = () => {
@@ -64,11 +63,8 @@ const HomePackage = () => {
       {/* Centered Explore Package Button */}
       <div className="flex justify-center mt-8 pb-2">
         <Link
-          to="#"
+          to="/allPackages"
           className="py-3 px-6 bg-teal-500 text-white rounded shadow hover:bg-teal-600 transition-all duration-300"
-          onClick={() => {
-            toast.success("Explore all packages");
-          }}
         >
           Explore Packages
         </Link>
