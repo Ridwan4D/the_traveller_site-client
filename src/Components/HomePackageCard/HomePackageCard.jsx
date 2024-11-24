@@ -6,14 +6,20 @@ import { Link } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
+import useWishlist from "../../Hooks/useWishlist";
 
 const HomePackageCard = ({ pkg }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const { wishlists, refetch } = useWishlist();
   const { isAdmin } = useAdmin();
   const { isGuide } = useGuide();
+  const wishId = wishlists.find((findId) => findId.mainPackId === pkg?._id);
 
   const handleAddToWishlist = (id) => {
+    if (wishId?.mainPackId === id) {
+      return toast.error("Package already added");
+    }
     const wishInfo = {
       mainPackId: id,
       image: pkg?.images[0],
@@ -27,6 +33,7 @@ const HomePackageCard = ({ pkg }) => {
       .then((res) => {
         if (res.data.insertedId) {
           toast.success("Package added to wish");
+          refetch();
         }
       })
       .catch((err) => {
