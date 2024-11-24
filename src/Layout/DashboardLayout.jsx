@@ -8,7 +8,13 @@ import { HiUserGroup } from "react-icons/hi";
 import { TbPackages } from "react-icons/tb";
 import { TiHomeOutline } from "react-icons/ti";
 import useGuide from "../Hooks/useGuide";
-import { MdAddCard, MdAssignmentTurnedIn } from "react-icons/md";
+import {
+  MdAddCard,
+  MdAssignmentAdd,
+  MdAssignmentTurnedIn,
+  MdOutlineAssignment,
+} from "react-icons/md";
+import { VscGitPullRequestCreate } from "react-icons/vsc";
 
 const DashboardLayout = () => {
   const { logout } = useAuth();
@@ -131,6 +137,37 @@ const DashboardLayout = () => {
                   >
                     <MdAssignmentTurnedIn />
                     <span>My Assigned Tours</span>
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {!isAdmin && !isGuide && (
+              <>
+                <li>
+                  <NavLink
+                    to="wishlist"
+                    className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500"
+                  >
+                    <MdOutlineAssignment />
+                    <span>My Wishlist</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="bookings"
+                    className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500"
+                  >
+                    <MdAssignmentAdd />
+                    <span>My Bookings</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="requestToAdmin"
+                    className="flex items-center gap-3 rounded p-3 text-slate-700 transition-colors hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 aria-[current=page]:bg-emerald-50 aria-[current=page]:text-emerald-500"
+                  >
+                    <VscGitPullRequestCreate />
+                    <span>Request To Admin</span>
                   </NavLink>
                 </li>
               </>

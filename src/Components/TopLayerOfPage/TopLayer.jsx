@@ -23,7 +23,7 @@ const TopLayer = ({ packageId, page, guideMail }) => {
 
   const goBack = () => navigate(-1);
   return (
-    <div className="flex justify-between items-center mb-6">
+    <div className="flex justify-between items-center mb-6 bg-gray-400 py-2 px-2 md:px-5">
       {isAdmin && (
         <Link
           to={`/dashboard/updatePackage/${packageId}`}

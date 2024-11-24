@@ -11,10 +11,10 @@ const UpdateRoleModal = ({ user, onClose, requested }) => {
   const [disable, setDisable] = useState(true);
 
   useEffect(() => {
-    if (requested) {
+    if (user?.requested) {
       setDisable(false);
     }
-  }, [requested]);
+  }, [user?.requested]);
 
   const handleRoleClick = (role) => {
     const userInfo = { role, requested };
@@ -45,6 +45,12 @@ const UpdateRoleModal = ({ user, onClose, requested }) => {
         <h3 className="text-lg font-semibold mb-4">
           Update Role for {user.userName}
         </h3>
+        {user?.requestedRole && (
+          <p className="text-sm font-semibold mb-4">
+            Request for: {user.requestedRole}
+          </p>
+        )}
+
         <div className="flex justify-center gap-4 mt-4">
           {user?.role !== "admin" && (
             <button

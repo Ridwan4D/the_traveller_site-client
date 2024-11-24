@@ -53,6 +53,7 @@ const ManageUsers = () => {
               <th className="py-3 px-4 text-left">Name</th>
               <th className="py-3 px-4 text-left">Email</th>
               <th className="py-3 px-4 text-left">Role</th>
+              <th className="py-3 px-4 text-left">Status</th>
               <th className="py-3 px-4 text-center">Actions</th>
             </tr>
           </thead>
@@ -74,6 +75,9 @@ const ManageUsers = () => {
                   <td className="py-3 px-4">{user.userName}</td>
                   <td className="py-3 px-4">{user.userEmail}</td>
                   <td className="py-3 px-4">{user.role || "User"}</td>
+                  <td className={`py-3 px-4 uppercase ${user?.requested ? "text-green-500" : "text-red-500"}`}>
+                    {user?.requested ? "Requested" : "Not Requested"}
+                  </td>
                   <td className="py-3 px-4 flex justify-center text-center">
                     <button
                       onClick={() => handleUpdateClick(user)}

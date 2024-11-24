@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import useGuides from "../../Hooks/useGuides";
+import TopLayer from "../../Components/TopLayerOfPage/TopLayer";
 
 const AllGuide = () => {
   const { guides } = useGuides();
 
   return (
     <div className="px-4 lg:px-8 py-12 bg-gray-100 h-screen">
+      <TopLayer />
       <SectionTitle
         heading="Our Guides"
         subHeading="Meet Our Excellent Guides"

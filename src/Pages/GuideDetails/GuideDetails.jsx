@@ -13,12 +13,12 @@ const GuideDetails = () => {
   const axiosPublic = useAxiosPublic();
   const { guides } = useGuides();
   const { theUser } = useUsers();
-  const { guideReviews } = useGuideReviews();
+  const { guideReviews, refetch } = useGuideReviews();
   const theGuide = guides?.find((guide) => guide?._id === id);
   const theGuideReviews = guideReviews.filter(
     (guideReview) => guideReview?.guideEmail === theGuide?.userEmail
   );
-  console.log(theGuideReviews);
+
   // Use React Hook Form
   const {
     register,
@@ -49,12 +49,12 @@ const GuideDetails = () => {
       .then((res) => {
         if (res.data.insertedId) {
           toast.success("Review Added");
+          refetch();
         }
       })
       .catch((err) => {
         console.log(err);
       });
-    console.log("Review submitted:", reviewInfo);
     reset();
     setRating(0);
   };
@@ -83,7 +83,6 @@ const GuideDetails = () => {
               Guide Details
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Email */}
               <div>
                 <p className="text-gray-700 dark:text-gray-300 font-medium">
                   Email:
@@ -92,8 +91,6 @@ const GuideDetails = () => {
                   {theGuide?.userEmail}
                 </p>
               </div>
-
-              {/* Phone */}
               <div>
                 <p className="text-gray-700 dark:text-gray-300 font-medium">
                   Phone:
@@ -102,8 +99,6 @@ const GuideDetails = () => {
                   {theGuide?.phone}
                 </p>
               </div>
-
-              {/* Address */}
               <div>
                 <p className="text-gray-700 dark:text-gray-300 font-medium">
                   Address:
@@ -112,8 +107,6 @@ const GuideDetails = () => {
                   {theGuide?.address}
                 </p>
               </div>
-
-              {/* Education */}
               <div>
                 <p className="text-gray-700 dark:text-gray-300 font-medium">
                   Education:
@@ -122,8 +115,6 @@ const GuideDetails = () => {
                   {theGuide?.education}
                 </p>
               </div>
-
-              {/* Experience */}
               <div>
                 <p className="text-gray-700 dark:text-gray-300 font-medium">
                   Experience:
@@ -132,8 +123,6 @@ const GuideDetails = () => {
                   {theGuide?.experience}
                 </p>
               </div>
-
-              {/* Languages */}
               <div>
                 <p className="text-gray-700 dark:text-gray-300 font-medium">
                   Languages:
@@ -201,6 +190,50 @@ const GuideDetails = () => {
                 Submit Review
               </button>
             </form>
+          </div>
+
+          {/* Display Reviews */}
+          <div className="p-6 mt-8 bg-gray-100 rounded-lg shadow-md dark:bg-gray-700">
+            <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-4">
+              Reviews
+            </h3>
+            {theGuideReviews.length === 0 ? (
+              <p className="text-gray-600 dark:text-gray-300">
+                No reviews yet.
+              </p>
+            ) : (
+              theGuideReviews.map((review) => (
+                <div key={review._id} className="flex items-start mb-4">
+                  <img
+                    className="w-12 h-12 rounded-full mr-4"
+                    src={review.adderImage}
+                    alt={review.adderName}
+                  />
+                  <div>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100">
+                      {review.adderName}
+                    </p>
+                    <div className="flex items-center">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <span
+                          key={star}
+                          className={`text-xl ${
+                            review.rating >= star
+                              ? "text-yellow-500"
+                              : "text-gray-300"
+                          }`}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    <p className="text-gray-700 dark:text-gray-300 mt-2">
+                      {review.comment}
+                    </p>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       ) : (
