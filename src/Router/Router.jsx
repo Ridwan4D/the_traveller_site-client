@@ -20,6 +20,7 @@ import RequestToAdmin from "../Pages/UserPage/RequestToAdmin/RequestToAdmin";
 import UserRoute from "./UserRoute";
 import Wishlist from "../Pages/UserPage/WishlistPage/Wishlist";
 import BookingPage from "../Pages/UserPage/BookingPage/BookingPage";
+import AssignedTour from "../Pages/GuidePage/AssignedTour";
 
 const router = createBrowserRouter([
   {
@@ -134,6 +135,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "assignedTour",
+        element: (
+          <AdminRoute>
+            <AssignedTour />
           </AdminRoute>
         ),
       },

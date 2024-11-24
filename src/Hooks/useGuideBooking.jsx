@@ -5,14 +5,14 @@ import useAuth from "./useAuth";
 const useGuideBooking = () => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
-  const { data: bookings = [], refetch } = useQuery({
-    queryKey: ["bookings"],
+  const { data: guideBookings = [], refetch } = useQuery({
+    queryKey: ["guideBookings"],
     queryFn: async () => {
       const result = await axiosPublic.get(`/bookings/${user.email}`);
       return result.data;
     },
   });
-  return { bookings, refetch };
+  return { guideBookings, refetch };
 };
 
 export default useGuideBooking;
