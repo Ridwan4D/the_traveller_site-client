@@ -3,13 +3,13 @@ import useAdmin from "../../Hooks/useAdmin";
 import useGuide from "../../Hooks/useGuide";
 import PropType from "prop-types";
 import { Link } from "react-router-dom";
-import useUsers from "../../Hooks/useUser";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import useAuth from "../../Hooks/useAuth";
 
 const HomePackageCard = ({ pkg }) => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useUsers();
+  const { user } = useAuth();
   const { isAdmin } = useAdmin();
   const { isGuide } = useGuide();
 
@@ -18,12 +18,12 @@ const HomePackageCard = ({ pkg }) => {
       mainPackId: id,
       image: pkg?.images[0],
       name: pkg?.tour_name,
-      email: user?.email,
+      adderMail: user?.email,
       price: pkg?.price,
     };
     console.log(wishInfo);
     axiosSecure
-      .post("/wishlists", wishInfo)
+      .post(`/wishlists`, wishInfo)
       .then((res) => {
         if (res.data.insertedId) {
           toast.success("Package added to wish");
