@@ -79,8 +79,8 @@ const BookingPage = () => {
         heading="Your Booked Tours"
         subHeading="Manage your bookings here"
       />
-      <div className="bg-gray-50 max-w-6xl mx-auto px-8 py-6 shadow-lg rounded-lg">
-        <div className="font-semibold flex justify-between items-center mb-6 text-gray-700">
+      <div className="bg-gray-50 max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-6 shadow-lg rounded-lg">
+        <div className="font-semibold flex flex-col md:flex-row justify-between items-center mb-6 text-gray-700 space-y-4 md:space-y-0">
           <h2 className="text-2xl">Total Bookings: {bookings.length}</h2>
           <h2 className="text-2xl">Total Price: ${parseInt(cost)}</h2>
         </div>
