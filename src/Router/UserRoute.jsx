@@ -58,6 +58,10 @@ const UserRoute = ({ children }) => {
     );
   }
 
+  if ((isAdmin || isGuide) && user) {
+    return <Navigate to="/" replace />;
+  }
+
   if (user && !isAdmin && !isGuide) {
     return children;
   }

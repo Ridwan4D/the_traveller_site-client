@@ -18,6 +18,8 @@ import AllGuide from "../Pages/AllGuide.jsx/AllGuide";
 import AllPackage from "../Pages/AllPackage.jsx/AllPackage";
 import RequestToAdmin from "../Pages/UserPage/RequestToAdmin/RequestToAdmin";
 import UserRoute from "./UserRoute";
+import Wishlist from "../Pages/UserPage/WishlistPage/Wishlist";
+import BookingPage from "../Pages/UserPage/BookingPage/BookingPage";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +86,22 @@ const router = createBrowserRouter([
         element: (
           <UserRoute>
             <RequestToAdmin />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "wishlist",
+        element: (
+          <UserRoute>
+            <Wishlist />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "bookings",
+        element: (
+          <UserRoute>
+            <BookingPage />
           </UserRoute>
         ),
       },
