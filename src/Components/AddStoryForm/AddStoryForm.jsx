@@ -3,6 +3,8 @@ import toast from "react-hot-toast";
 import PropTypes from "prop-types";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useTourTypes from "../../Hooks/useTourTypes";
+import useGuides from "../../Hooks/useGuides";
 
 const cloudinary_upload_preset = import.meta.env.VITE_UPLOAD_PRESET;
 const cloudinaryAPI = `https://api.cloudinary.com/v1_1/${
@@ -12,6 +14,8 @@ const cloudinaryAPI = `https://api.cloudinary.com/v1_1/${
 const AddStoryForm = ({ refetch }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const { guides } = useGuides();
+  const { tourTypes } = useTourTypes();
   const {
     register,
     handleSubmit,
@@ -63,9 +67,9 @@ const AddStoryForm = ({ refetch }) => {
       const response = await axiosSecure.post("/stories", storyInfo);
 
       if (response.data.insertedId) {
-        reset(); 
+        reset();
         toast.success("Story Added To Profile");
-        // refetch(); 
+        refetch();
       }
     } catch (error) {
       console.error(error);
@@ -96,6 +100,8 @@ const AddStoryForm = ({ refetch }) => {
               </span>
             )}
           </div>
+
+          {/* Guide Name Selection */}
           <div>
             <label
               htmlFor="guide_name"
@@ -103,18 +109,26 @@ const AddStoryForm = ({ refetch }) => {
             >
               Guide Name
             </label>
-            <input
-              type="text"
+            <select
               id="guide_name"
               {...register("guide_name", { required: true })}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            />
+            >
+              <option value="">Select a Guide</option>
+              {guides?.map((guide) => (
+                <option key={guide.id} value={guide?.userName}>
+                  {guide?.userName}
+                </option>
+              ))}
+            </select>
             {errors.guide_name && (
               <span className="text-sm text-red-600 font-semibold">
-                Fill This Field
+                Select a Guide
               </span>
             )}
           </div>
+
+          {/* Tour Type Selection */}
           <div>
             <label
               htmlFor="tour_type"
@@ -122,18 +136,25 @@ const AddStoryForm = ({ refetch }) => {
             >
               Tour Type
             </label>
-            <input
-              type="text"
+            <select
               id="tour_type"
               {...register("tour_type", { required: true })}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            />
+            >
+              <option value="">Select a Tour Type</option>
+              {tourTypes?.map((type) => (
+                <option key={type.id} value={type?.trip_type}>
+                  {type?.trip_type}
+                </option>
+              ))}
+            </select>
             {errors.tour_type && (
               <span className="text-sm text-red-600 font-semibold">
-                Fill This Field
+                Select a Tour Type
               </span>
             )}
           </div>
+
           <div>
             <label
               htmlFor="date"

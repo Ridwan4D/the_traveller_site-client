@@ -24,6 +24,7 @@ import AssignedTour from "../Pages/GuidePage/AssignedTour";
 import GuideRoute from "./GuideRoute";
 import CommunityPage from "../Pages/CommunityPage/CommunityPage";
 import AboutPage from "../Pages/AboutPage/AboutPage";
+import StoryDetails from "../Pages/StoryDetails/StoryDetails";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,14 @@ const router = createBrowserRouter([
         element: (
           <SecureRoute>
             <GuideDetails />
+          </SecureRoute>
+        ),
+      },
+      {
+        path: "/storyDetails/:id",
+        element: (
+          <SecureRoute>
+            <StoryDetails />
           </SecureRoute>
         ),
       },
