@@ -3,15 +3,25 @@ import useAdmin from "../../Hooks/useAdmin";
 import useGuide from "../../Hooks/useGuide";
 import PropType from "prop-types";
 import useUsers from "../../Hooks/useUser";
+import { useState } from "react";
+import UpdateUserModal from "../../Pages/Profile/Shared/UpdateUserModal";
 
 const TopLayer = ({ packageId, page, guideMail }) => {
   const { theUser } = useUsers();
   const { isAdmin } = useAdmin();
   const { isGuide } = useGuide();
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleEditProfile = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const goBack = () => navigate(-1);
-
   return (
     <div className="flex justify-between items-center mb-6">
       {isAdmin && (
@@ -25,7 +35,10 @@ const TopLayer = ({ packageId, page, guideMail }) => {
       {page == "guideDetails" &&
         isGuide &&
         theUser?.userEmail === guideMail && (
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">
+          <button
+            onClick={handleEditProfile}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition"
+          >
             Update Info
           </button>
         )}
@@ -35,6 +48,11 @@ const TopLayer = ({ packageId, page, guideMail }) => {
       >
         Go Back
       </button>
+      <UpdateUserModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        userInfo={theUser}
+      />
     </div>
   );
 };
