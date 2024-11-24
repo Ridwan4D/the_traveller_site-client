@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import useGuides from "../../Hooks/useGuides";
+import TopLayer from "../../Components/TopLayerOfPage/TopLayer";
 
 const GuideDetails = () => {
   const { id } = useParams();
@@ -8,6 +9,7 @@ const GuideDetails = () => {
 
   return (
     <div className="p-8 bg-gray-50 dark:bg-gray-900">
+      <TopLayer page={"guideDetails"} guideMail={theGuide?.userEmail} />
       {theGuide ? (
         <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
           {/* Guide Image and Name */}
