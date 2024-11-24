@@ -17,6 +17,7 @@ import GuideDetails from "../Pages/GuideDetails/GuideDetails";
 import AllGuide from "../Pages/AllGuide.jsx/AllGuide";
 import AllPackage from "../Pages/AllPackage.jsx/AllPackage";
 import RequestToAdmin from "../Pages/UserPage/RequestToAdmin/RequestToAdmin";
+import UserRoute from "./UserRoute";
 
 const router = createBrowserRouter([
   {
@@ -81,9 +82,9 @@ const router = createBrowserRouter([
       {
         path: "requestToAdmin",
         element: (
-          <SecureRoute>
+          <UserRoute>
             <RequestToAdmin />
-          </SecureRoute>
+          </UserRoute>
         ),
       },
       {
