@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import PropType from "prop-types";
 
 const SearchBar = ({ packages }) => {
@@ -27,8 +26,8 @@ const SearchBar = ({ packages }) => {
   const filteredPackages = packages.filter((pkg) => {
     const searchTerm = search.toLowerCase();
     return (
-      pkg?.name?.toLowerCase().includes(searchTerm) ||
-      pkg?.category?.toLowerCase().includes(searchTerm)
+      pkg?.tour_name?.toLowerCase().includes(searchTerm) ||
+      pkg?.trip_type?.toLowerCase().includes(searchTerm)
     );
   });
 
@@ -60,7 +59,7 @@ const SearchBar = ({ packages }) => {
             {filteredPackages.length > 0 ? (
               filteredPackages.map((pkg) => (
                 <Link
-                  to={`/packageDetails/${pkg.id}`} // Link to the package details page
+                  to={`/packageDetails/${pkg._id}`} // Link to the package details page
                   key={pkg.id}
                   className="flex flex-col md:flex-row items-center bg-gray-100 p-1 rounded-md hover:bg-gray-200 transition"
                 >
@@ -74,8 +73,7 @@ const SearchBar = ({ packages }) => {
                       {pkg.tour_name}
                     </h3>
                     <p className="text-teal-600 flex justify-center md:justify-start items-center">
-                      <FaBangladeshiTakaSign className="mr-1" />
-                      {pkg.price}
+                      ${pkg.price}
                     </p>
                     <p className="text-gray-500 text-sm">{pkg.category}</p>
                   </div>

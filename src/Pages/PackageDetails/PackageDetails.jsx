@@ -47,8 +47,8 @@ const PackageDetails = () => {
             Meet Our Guides
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {guides.slice(0, 3).map((guide) => (
-              <GuideCard key={guide.id} guide={guide} />
+            {guides.slice(0, 3).map((guide, idx) => (
+              <GuideCard key={idx} guide={guide} />
             ))}
           </div>
           {/* Show All Guides Button */}
@@ -73,6 +73,7 @@ const PackageDetails = () => {
           <TourBookingForm
             tourName={thePackage?.tour_name}
             tourPrice={parseInt(thePackage?.price)}
+            packageId={thePackage?._id}
           />
         </div>
       )}

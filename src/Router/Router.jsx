@@ -28,6 +28,8 @@ import StoryDetails from "../Pages/StoryDetails/StoryDetails";
 import TripTypePage from "../Pages/TripType/TripTypePage";
 import ContactPage from "../Pages/ContactPage/ContactPage";
 import BlogPage from "../Pages/BlogPage/BlogPage";
+import Payment from "../Pages/UserPage/Payment/Payment";
+import PaymentHistory from "../Pages/UserPage/PaymentHistory/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -142,6 +144,22 @@ const router = createBrowserRouter([
         element: (
           <UserRoute>
             <BookingPage />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "payment/:id",
+        element: (
+          <UserRoute>
+            <Payment />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "paymentHistory",
+        element: (
+          <UserRoute>
+            <PaymentHistory />
           </UserRoute>
         ),
       },

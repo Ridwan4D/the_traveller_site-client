@@ -1,5 +1,5 @@
 import PropType from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
@@ -11,12 +11,16 @@ import useGuide from "../../Hooks/useGuide";
 const PackageCard = ({ pkg }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   const { wishlists, refetch } = useWishlist();
   const { isAdmin } = useAdmin();
   const { isGuide } = useGuide();
   const wishId = wishlists.find((findId) => findId.mainPackId === pkg?._id);
 
   const handleAddToWishlist = (id) => {
+    if (!user) {
+      return navigate("/login");
+    }
     if (wishId?.mainPackId) {
       return toast.error("Package already added");
     }

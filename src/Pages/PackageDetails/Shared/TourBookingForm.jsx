@@ -6,7 +6,7 @@ import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useGuides from "../../../Hooks/useGuides";
 
-const TourBookingForm = ({ tourName, tourPrice }) => {
+const TourBookingForm = ({ packageId, tourName, tourPrice }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
@@ -31,6 +31,7 @@ const TourBookingForm = ({ tourName, tourPrice }) => {
       userEmail: user.email,
       status: "In Review",
       tourName,
+      packageId,
     };
     axiosSecure.post("/bookings", bookingInfo).then((res) => {
       if (res.data.insertedId) {
@@ -171,6 +172,7 @@ const TourBookingForm = ({ tourName, tourPrice }) => {
   );
 };
 TourBookingForm.propTypes = {
+  packageId: PropType.string,
   tourName: PropType.string,
   tourPrice: PropType.number,
 };

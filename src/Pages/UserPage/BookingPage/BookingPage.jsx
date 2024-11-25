@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import useBookings from "../../../Hooks/useBookings";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
+import { Link } from "react-router-dom";
 
 const BookingPage = () => {
   const { bookings, refetch } = useBookings();
@@ -126,7 +127,8 @@ const BookingPage = () => {
                     <td className="py-3 text-center">${item.price}</td>
                     <td className="py-3 text-center">{item.status}</td>
                     <td className="py-3 text-center">
-                      <button
+                      <Link
+                        to={`/dashboard/payment/${item?._id}`}
                         disabled={item.status === "Rejected"}
                         className={`px-4 py-2 rounded-md ${
                           item.status === "Rejected"
@@ -135,7 +137,7 @@ const BookingPage = () => {
                         }`}
                       >
                         Pay
-                      </button>
+                      </Link>
                     </td>
                     <td className="py-3 text-center">
                       <button
