@@ -176,6 +176,7 @@ const router = createBrowserRouter([
             <ManageUsers />
           </AdminRoute>
         ),
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/usersCount`),
       },
       {
         path: "assignedTour",

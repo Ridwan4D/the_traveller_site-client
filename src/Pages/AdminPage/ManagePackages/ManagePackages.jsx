@@ -4,9 +4,28 @@ import usePackages from "../../../Hooks/usePackages";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 const ManagePackages = () => {
   const axiosSecure = useAxiosSecure();
-  const { packages, refetch } = usePackages();
+  const { packages } = usePackages();
+  const count = packages.length;
+  console.log(count);
+  const itemPerPage = 3;
+  const numberOfPages = Math.ceil(count / itemPerPage);
+  const pages = [...Array(numberOfPages).keys()];
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const { data: allPackages = [], refetch } = useQuery({
+    queryKey: ["allUsers", currentPage],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/packages?page=${currentPage}&size=${itemPerPage}`
+      );
+      return res.data;
+    },
+  });
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -29,6 +48,28 @@ const ManagePackages = () => {
     });
   };
 
+  // Go to the previous page
+  const goToPreviousPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage((prev) => prev - 1);
+      refetch();
+    }
+  };
+
+  // Go to the next page
+  const goToNextPage = () => {
+    if (currentPage < numberOfPages - 1) {
+      setCurrentPage((prev) => prev + 1);
+      refetch();
+    }
+  };
+
+  // Handle page change by clicking on a page number
+  const handlePageClick = (pageIndex) => {
+    setCurrentPage(pageIndex);
+    refetch(); // Re-fetch data for the selected page
+  };
+
   return (
     <div className="container mx-auto p-2 md:p-6">
       <Helmet>
@@ -38,7 +79,14 @@ const ManagePackages = () => {
         heading="Manage Packages"
         subHeading="View, edit, or delete packages"
       />
-
+      <div className="font-cinzel font-bold mb-10 space-y-2 md:flex justify-between items-center">
+        <h2 className="text-lg md:text-3xl">
+          Total Packages: {packages.length}
+        </h2>
+        <h2 className="text-lg md:text-3xl">
+          In This Page Package: {allPackages.length}
+        </h2>
+      </div>
       {/* Table for displaying packages */}
       <div className="overflow-x-auto bg-white shadow-lg rounded-lg mt-6">
         <table className="min-w-full text-sm text-left text-gray-500">
@@ -66,7 +114,7 @@ const ManagePackages = () => {
             </tr>
           </thead>
           <tbody>
-            {packages.map((pkg, index) => (
+            {allPackages.map((pkg, index) => (
               <tr
                 key={pkg._id}
                 className="border-b hover:bg-gray-100 transition-colors duration-200"
@@ -113,6 +161,41 @@ const ManagePackages = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      {/* Pagination Controls */}
+      <div className="max-w-5xl mx-auto my-7 text-center flex items-center justify-center gap-2">
+        {/* Previous Button */}
+        <button
+          className={`flex items-center justify-center bg-blue-500 text-white text-sm px-5 py-2 rounded-md shadow-sm hover:bg-teal-500 hover:text-white transition-all duration-300 ease-in-out disabled:bg-gray-400 disabled:text-gray-500 disabled:cursor-not-allowed`}
+          onClick={goToPreviousPage}
+          disabled={currentPage === 0}
+        >
+          <GoArrowLeft />
+        </button>
+
+        {/* Pagination Buttons */}
+        {pages.length > 0 &&
+          pages.map((page) => (
+            <button
+              key={page}
+              className={`flex items-center justify-center bg-teal-500 text-white text-sm px-5 py-2 rounded-md transition-all duration-300 ease-in-out hover:bg-teal-500 hover:text-white disabled:bg-gray-400 disabled:text-gray-500 disabled:cursor-not-allowed ${
+                currentPage === page ? "bg-teal-500 text-white" : ""
+              }`}
+              onClick={() => handlePageClick(page)}
+              disabled={currentPage === page}
+            >
+              {page + 1}
+            </button>
+          ))}
+
+        {/* Next Button */}
+        <button
+          className={`flex items-center justify-center bg-blue-500 text-white text-sm px-5 py-2 rounded-md shadow-sm hover:bg-teal-500 hover:text-white transition-all duration-300 ease-in-out disabled:bg-gray-400 disabled:text-gray-500 disabled:cursor-not-allowed`}
+          onClick={goToNextPage}
+          disabled={currentPage === numberOfPages - 1}
+        >
+          <GoArrowRight />
+        </button>
       </div>
     </div>
   );
