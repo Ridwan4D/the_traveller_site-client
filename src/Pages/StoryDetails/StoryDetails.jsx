@@ -7,6 +7,7 @@ import {
   FacebookIcon,
   WhatsappIcon,
 } from "react-share";
+import TopLayer from "../../Components/TopLayerOfPage/TopLayer";
 
 const StoryDetails = () => {
   const { id } = useParams();
@@ -33,7 +34,7 @@ const StoryDetails = () => {
       <Helmet>
         <title>Story Details | Traveller Site</title>
       </Helmet>
-
+      <TopLayer />
       <div className="container mx-auto px-4">
         <article className="max-w-3xl mx-auto space-y-8">
           {/* Header Section */}

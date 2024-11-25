@@ -115,8 +115,8 @@ const AddStoryForm = ({ refetch }) => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
               <option value="">Select a Guide</option>
-              {guides?.map((guide) => (
-                <option key={guide.id} value={guide?.userName}>
+              {guides?.map((guide, idx) => (
+                <option key={idx} value={guide?.userName}>
                   {guide?.userName}
                 </option>
               ))}
@@ -142,8 +142,8 @@ const AddStoryForm = ({ refetch }) => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
               <option value="">Select a Tour Type</option>
-              {tourTypes?.map((type) => (
-                <option key={type.id} value={type?.trip_type}>
+              {tourTypes?.map((type, idx) => (
+                <option key={idx} value={type?.trip_type}>
                   {type?.trip_type}
                 </option>
               ))}
