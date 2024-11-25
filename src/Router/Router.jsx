@@ -26,6 +26,7 @@ import CommunityPage from "../Pages/CommunityPage/CommunityPage";
 import AboutPage from "../Pages/AboutPage/AboutPage";
 import StoryDetails from "../Pages/StoryDetails/StoryDetails";
 import TripTypePage from "../Pages/TripType/TripTypePage";
+import ContactPage from "../Pages/ContactPage/ContactPage";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: "/allGuides",
         element: <AllGuide />,
+      },
+      {
+        path: "/contact",
+        element: <ContactPage />,
       },
       {
         path: "/allPackages",
