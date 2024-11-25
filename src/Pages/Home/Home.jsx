@@ -22,17 +22,6 @@ const Home = () => {
       <section className="mt-10 border-b border-gray-300 border-dashed">
         <HomeStory />
       </section>
-
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </div>
   );
 };

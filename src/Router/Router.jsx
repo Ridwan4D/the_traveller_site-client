@@ -27,6 +27,7 @@ import AboutPage from "../Pages/AboutPage/AboutPage";
 import StoryDetails from "../Pages/StoryDetails/StoryDetails";
 import TripTypePage from "../Pages/TripType/TripTypePage";
 import ContactPage from "../Pages/ContactPage/ContactPage";
+import BlogPage from "../Pages/BlogPage/BlogPage";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactPage />,
+      },
+      {
+        path: "/blog",
+        element: <BlogPage />,
       },
       {
         path: "/allPackages",

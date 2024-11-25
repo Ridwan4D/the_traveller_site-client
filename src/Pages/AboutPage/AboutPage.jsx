@@ -25,28 +25,15 @@ const AboutPage = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      {/* Navbar Section */}
-      <nav className="bg-blue-600 p-4 text-white shadow-md">
-        <div className="flex items-center justify-between">
-          <div className="text-xl font-bold">Tourist Guide</div>
-          <div className="flex items-center space-x-4">
-            <button className="text-white hover:text-yellow-400 transition">
-              Login
-            </button>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <div
-        className="bg-cover bg-center h-64 text-blue-500 flex items-center justify-center"
-        style={{ backgroundImage: "url('/images/about-banner.jpg')" }}
+        className="bg-cover bg-center text-blue-500 flex items-center justify-center pt-5"
       >
         <h1 className="text-4xl font-semibold drop-shadow-lg">About Us</h1>
       </div>
 
       {/* Mission Statement Section */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-6  pt-4 pb-12">
         <SectionTitle heading={"Our Mission"} subHeading={"What drives us"} />
         <p className="text-lg text-gray-700 leading-relaxed">
           Our mission is to make tourism in Bangladesh more accessible and
