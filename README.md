@@ -37,4 +37,4 @@ This is tour guide based website. A user can see the packages which is added by 
 
 
 ## Links
-[Reez Tour Guide](https://the-tour-guide-for-tourist.web.app/)
+[Traveler Site](https://traveller-site.web.app)
