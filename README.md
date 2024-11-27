@@ -12,6 +12,7 @@ This is tour guide based website. A user can see the packages which is added by 
 - MongoDB
 - Responsive Carousel
 - React Hook form
+- Stripe
 
 
 ## Features
